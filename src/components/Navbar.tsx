@@ -1,4 +1,5 @@
 import React from 'react';
+import { NavLink } from 'react-router-dom';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
@@ -11,7 +12,11 @@ import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormGroup from '@material-ui/core/FormGroup';
 import MenuItem from '@material-ui/core/MenuItem';
 import Menu from '@material-ui/core/Menu';
-import { Link } from 'react-router-dom';
+import List from '@material-ui/core/List';
+import ListItem from '@material-ui/core/ListItem';
+import { ListItemIcon, ListItemText } from '@material-ui/core';
+import HomeIcon from '@material-ui/icons/Home';
+import ReceiptIcon from '@material-ui/icons/Receipt';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -46,10 +51,24 @@ export default function MenuAppBar() {
   };
 
   const sideMenu = (
-    <div>
-      <Link to="/">Home</Link>
-      <Link to="/about">About</Link>
-    </div>
+    <List>
+      <NavLink exact to="/">
+        <ListItem button>
+          <ListItemIcon>
+            <HomeIcon />
+          </ListItemIcon>
+          <ListItemText primary="Home" />
+        </ListItem>
+      </NavLink>
+      <NavLink exact to="/about">
+        <ListItem button>
+          <ListItemIcon>
+            <ReceiptIcon />
+          </ListItemIcon>
+          <ListItemText primary="About" />
+        </ListItem>
+      </NavLink>
+    </List>
   )
 
   return (
@@ -80,8 +99,7 @@ export default function MenuAppBar() {
             画像アップローダー（仮）
           </Typography>
           <div>
-              <Link to='/'>Home</Link>
-              <Link to='/about'>About</Link>
+            {sideMenu}
           </div>
           <div>
             <IconButton
