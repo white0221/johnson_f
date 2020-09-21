@@ -14,7 +14,7 @@ import MenuItem from '@material-ui/core/MenuItem';
 import Menu from '@material-ui/core/Menu';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
-import { ListItemIcon, ListItemText } from '@material-ui/core';
+import { ListItemIcon, ListItemText, SwipeableDrawer } from '@material-ui/core';
 import HomeIcon from '@material-ui/icons/Home';
 import ReceiptIcon from '@material-ui/icons/Receipt';
 
@@ -35,6 +35,7 @@ const useStyles = makeStyles((theme: Theme) =>
 export default function MenuAppBar() {
   const classes = useStyles();
   const [auth, setAuth] = React.useState(true);
+  const [menuOpen, setMenuOpen] = React.useState(false);
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
 
@@ -49,6 +50,14 @@ export default function MenuAppBar() {
   const handleClose = () => {
     setAnchorEl(null);
   };
+
+  const handleMenuOpen = () => {
+    setMenuOpen(true);
+  };
+
+  const handleMenuClose = () => {
+    setMenuOpen(false);
+  }
 
   const sideMenu = (
     <List>
@@ -92,15 +101,19 @@ export default function MenuAppBar() {
             className={classes.menuButton}
             color="inherit"
             aria-label="menu"
+            onClick={handleMenuOpen}
           >
             <MenuIcon />
           </IconButton>
+          <SwipeableDrawer
+            open={menuOpen}
+            onClick={handleMenuClose}
+          >
+            {sideMenu}
+          </SwipeableDrawer>
           <Typography variant="h6" className={classes.title}>
             画像アップローダー（仮）
           </Typography>
-          <div>
-            {sideMenu}
-          </div>
           <div>
             <IconButton
               aria-label="account of current user"
