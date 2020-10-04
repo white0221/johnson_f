@@ -77,6 +77,14 @@ export default function MenuAppBar() {
           <ListItemText primary="About" />
         </ListItem>
       </NavLink>
+      <NavLink exact to="/dev">
+        <ListItem button>
+          <ListItemIcon>
+            <ReceiptIcon />
+          </ListItemIcon>
+          <ListItemText primary="Development" />
+        </ListItem>
+      </NavLink>
     </List>
   )
 
@@ -107,7 +115,8 @@ export default function MenuAppBar() {
           </IconButton>
           <SwipeableDrawer
             open={menuOpen}
-            onClick={handleMenuClose}
+            onOpen={handleMenuClose}
+            onClose={handleMenuClose}
           >
             {sideMenu}
           </SwipeableDrawer>
